@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose");
 
 const movieSchema = new Schema({
-    title: {type: String, required:[true, "No title provided"]},
+    title: {type: String, required:[true, "No title provided"], unique: true},
     description: {type: String, required:[true, "No description was provided"]},
     image: {type: String, required:[true, "No image was provided"]},
     release_date: {type: String, required:[true, "Release date is a required field"]},
