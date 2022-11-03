@@ -4,10 +4,10 @@ var nodemailer = require('nodemailer')
 
 class Emailer {
 	#transporter = nodemailer.createTransport({
-        // host:SMTP_HOST,
-		service: 'gmail',
-        // port:SMTP_PORT,
-        // secure:true,
+        host:SMTP_HOST,
+		// service: 'gmail',
+        port:SMTP_PORT,
+        secure:true,
 		auth: {
 			user: UMAIL,
 			pass: UPASS,
