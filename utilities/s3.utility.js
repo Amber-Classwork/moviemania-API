@@ -3,7 +3,7 @@ const AWS = require("aws-sdk");
 const fs = require("fs");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
-const {AWS_BUCKET_NAME, AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_BUCKET_REGION} = process.env;
+const {AMZ_BUCKET_NAME, AMZ_ACCESS_KEY, AMZ_SECRET_KEY, AMZ_BUCKET_REGION} = process.env;
 
 /**
  *  Description
@@ -23,7 +23,7 @@ class AWSStorage{
      * @param {string} bucketName 
      * @param {string} region 
      */
-    constructor(accessKeyId = AWS_ACCESS_KEY, secretAccessKey=AWS_SECRET_KEY, bucketName = AWS_BUCKET_NAME, region = AWS_BUCKET_REGION){
+    constructor(accessKeyId = AMZ_ACCESS_KEY, secretAccessKey=AMZ_SECRET_KEY, bucketName = AMZ_BUCKET_NAME, region = AMZ_BUCKET_REGION){
 
 
         this._bucketName = bucketName;
