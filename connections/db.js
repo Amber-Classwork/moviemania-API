@@ -3,8 +3,6 @@ const {DB_URI} = process.env;
 
 
 const MONGOOSE_OPTIONS = {
-    bufferCommands: false, // prevents use of models if not connected
-
 
 }
 
