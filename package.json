@@ -2,10 +2,10 @@
   "name": "mongo_express_api",
   "version": "1.0.0",
   "description": "Tested template for easy use when creating API's",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "debug": "nodemon server.js"
+    "start": "node index.js",
+    "debug": "nodemon index.js"
   },
   "repository": {
     "type": "git",
