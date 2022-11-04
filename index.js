@@ -24,7 +24,6 @@ server.use(cookieParser()); // uses cookie to store tokens
 server.use(express.json()); //allow us to read the request body
 server.use(express.urlencoded({extended:true})); /// allow for query strings to be encoded with library tthat parses nested objects.
 server.use(cors(CORS_OPTION)); //setting cors with option;
-connectDatabase();
 
 
 // Routers
@@ -45,6 +44,7 @@ server.all("/:route",(req, res)=>{
 
 
 
-server.listen(PORT, ()=>{
+server.listen(PORT, async ()=>{
+    await connectDatabase();
     console.log("listening on port ",PORT );
 });
