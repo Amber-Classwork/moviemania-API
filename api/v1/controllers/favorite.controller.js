@@ -36,7 +36,7 @@ class FavoriteController {
         try{
             let data = req.body;
             if(Object.keys(data).length == 0) throw new Error("No data passed to create user profile");
-            let favorite = await new Favorite(data)
+            let favorite = await Favorite.create(data)
             JSONResponse.success(res, "User favorite successfully created", favorite, 201);
         }catch(error){
             JSONResponse.error(res, "Error creating user favorites", error, 400);

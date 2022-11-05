@@ -32,9 +32,10 @@ class MovieController{
         try{
             let data = req.body;
             if(Object.keys(data).length == 0)throw new Error("No data to create movie");
-            data.video_url = (req.files["video_url"]) ? req.files["video_url"].location : undefined;
-            data.image = (req.files["image"]) ? req.files["image"].location : undefined;
-            let movie = await new Movie(data);
+            console.log(req.files);
+            data.video_url = (req.files["video_url"]) ? req.files["video_url"][0].location : undefined;
+            data.image = (req.files["image"]) ? req.files["image"][0].location : undefined;
+            let movie = await Movie.create(data);
             JSONResponse.success(res, "Successfully created custom Movie", movie, 201)
         }catch(error){
             JSONResponse.error(res, "Unable to create custom movie", error, 400);
