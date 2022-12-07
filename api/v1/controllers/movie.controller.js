@@ -48,13 +48,13 @@ class MovieController{
             let response = await axios.get(`https://api.themoviedb.org/3/discover/movie/?api_key=${TMDB_KEY}&append_to_response=videos`);
             console.timeEnd("response")
             let data = {
-                popular: response.data,
-                comedy: comedy.data,
-                action: action.data,
-                animation: animation.data,
-                romance: romance.data,
-                fantasy: fantasy.data,
-                drama: drama.data,
+                popular: response.data["results"],
+                comedy: comedy.data["results"],
+                action: action.data["results"],
+                animation: animation.data["results"],
+                romance: romance.data["results"],
+                fantasy: fantasy.data["results"],
+                drama: drama.data["results"],
             }
             JSONResponse.success(res, "Successfully retrieved all movies", data, 200);
         }catch(error){
