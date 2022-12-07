@@ -31,6 +31,12 @@ class MovieController{
         try{
             // let genresResponse = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_KEY}&append_to_response=videos`);
             // console.log(genresResponse.data)
+            if(req.query.genre){
+                let genre = req.query.genre
+                return this.getMoviesByGenre(req, res, genre);
+            }else if(Object.keys(req.query).length > 0){
+                return JSONResponse.error(res, "Not a valid query parameter", 404);
+            }
             console.time("response")
 
             let comedy = await axios.get(`https://api.themoviedb.org/3/discover/movie/?api_key=${TMDB_KEY}&append_to_response=videos&with_genres=35`);
@@ -65,6 +71,25 @@ class MovieController{
             JSONResponse.success(res, "Successfully retrieved Movie", response.data, 200);
         }catch(error){
             JSONResponse.error(res, "Unable to retrieve movie ", error, 404)
+        }
+    }
+
+    static getMoviesByGenre = async(req, res, genre)=>{
+        try{
+            let responsePg_1 = await axios.get(`https://api.themoviedb.org/3/discover/movie/?api_key=${TMDB_KEY}&append_to_response=videos&with_genres=${genre}&page=1`);
+            let responsePg_2 = await axios.get(`https://api.themoviedb.org/3/discover/movie/?api_key=${TMDB_KEY}&append_to_response=videos&with_genres=${genre}&page=2`);
+
+            if(Array.isArray(responsePg_1.data["results"]) && Array.isArray(responsePg_2.data["results"])){
+
+                responsePg_1.data["results"].push(...responsePg_2.data["results"])
+            }
+
+            let data = responsePg_1.data;
+
+            JSONResponse.success(res, "Successfully retrieved movies with this genre",data, 200 )
+
+        }catch(error){
+            JSONResponse.error(res, "Unable to retrieve movies of this genres", error, 404);
         }
     }
 
